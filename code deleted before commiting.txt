@@ -1,0 +1,27 @@
+// $("#crystal1").on("click", function() {
+        //   alert("Crystal1 pressed");
+        //   total = total + randomCrys1 ;
+        //   alert("new total = " + total );
+      
+        // });   
+		
+        // $("#crystal2").on("click", function() {
+        //   alert("Crystal2 pressed");
+        //   total = total + randomCrys2 ;
+        //   alert("new total = " + total );
+      
+        // }); 
+
+        //  $("#crystal3").on("click", function() {
+        //   alert("Crystal3 pressed");
+        //   total = total + randomCrys3 ;
+        //   alert("new total = " + total );
+      
+        // }); 
+
+        //  $("#crystal4").on("click", function() {
+        //   alert("Crystal4 pressed");
+        //   total = total + randomCrys4 ;
+        //   alert("new total = " + total );
+      
+        // }); 

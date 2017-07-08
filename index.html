@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Crystals Game</title>
+
+	<!-- Added link to the jQuery library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Added a link to Bootstrap-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+   <script type="text/javascript" src="assets/javascript/game.js"></script>
+</head>
+<body>
+
+<div class="jumbotron">
+
+    <h1 class="text-center">Crystals Collector!</h1>
+
+
+    <div class="text-center">
+    <h4> Match the Target number</h4>
+    <h4> by clicking the crystals </h4>
+    
+    </div>
+</div>
+
+<div class="container">
+
+  <div class="row">
+  	<div class="col-sm-6">
+  		<h2 class="text-center"> Target number : <span id="random-number"></span></h2>
+  		<h2 class="text-center">Score : <span id="total"></span></h2>
+    </div> 
+
+  	<div class="col-sm-6">
+  		<h2 class="text-center">Wins : <span id="win"></span></h2>
+  		<h2 class="text-center">Losses : <span id="losses"></span></h2>
+  	</div>
+  </div> <!-- end of row -->
+
+</div>
+<div class= "row">
+
+<div class="col-sm-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="text-center">click the crystals to add to your score and match the Target number</h3>
+          </div>
+          <div class="panel-body">
+          <div class = "row">
+            <div class="col-sm- col-sm-push-0 col-sm-offset-4">
+            <img id="crystal1" src="assets/images/green.jpg" alt="green crystal" style="height:100px;">&nbsp;
+            <img id="crystal2" src="assets/images/pink.jpg" alt="pink crystal" style="height:130px;">&nbsp;
+            
+           
+            <img id="crystal3" src="assets/images/aqua.jpg" alt="aqua crystal" style="height:100px;">&nbsp;
+            <img id="crystal4" src="assets/images/purple.jpg" alt="purple crystal" style="height:100px;">
+           </div>
+          </div>                    
+
+            
+            
+          </div>
+        </div>
+      </div>
+
+<script type="text/javascript"> //JavaScript starts here
+		
+    $(document).ready(function() {
+
+    	var random = 0;
+      var win = 0;
+    	var losses = 0;
+      var total = 0;
+      var randomCrys1 = 0;
+      var randomCrys2 = 0;
+      var randomCrys3 = 0;
+      var randomCrys4 = 0;
+      var crystalValues = [];
+
+   
+
+    	function getRandom(min, max) {
+  		  min = Math.ceil(min);
+  		  max = Math.floor(max);
+  		  return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
+		  }
+
+      function getTargetNumber () {
+        // generate the random number
+        random = getRandom(19, 120);
+        
+        // ... and then dump the random number into the random-number div.
+        $("#random-number").html(random);
+      };
+
+		// generate the random number for crystals
+
+      function getCrystalRandom () {
+
+      return Math.floor(Math.random() * 12) + 1;
+      } ;
+
+      function getCrystalValues () {
+        randomCrys1 = getCrystalRandom();
+        randomCrys2 = getCrystalRandom();
+        randomCrys3 = getCrystalRandom();
+        randomCrys4 = getCrystalRandom();
+
+        crystalValues = [randomCrys1, randomCrys2, randomCrys3, randomCrys4];
+      }
+      
+      function resetvars() {
+        getTargetNumber();
+        getCrystalValues();
+        total = 0; // sets score to 0
+        $("#total").html(total);
+      }
+
+
+// Starting ...
+      resetvars();
+      
+
+        [1,2,3,4].forEach(function(item){
+          var currentId = "#crystal" + item;  //create id for each of the 4
+          var currentCrystal = $(currentId);  // get the element
+          currentCrystal.on("click", function() {
+          total = total + crystalValues[item-1];
+          $("#total").html(total);
+          console.log ("total = " + total);
+          console.log ("random =" + random);
+          
+          if (total === random) {
+              win ++;
+              $("#win").html(win);
+              alert("you did it")
+              resetvars();
+            }
+            else if (total > random) {
+              losses ++;
+              alert("you lost");
+              $("#losses").html(losses);
+              resetvars();
+            }
+          });
+        } )
+
+        
+      });
+
+
+</script>
+</body>
+</html>
